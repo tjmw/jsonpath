@@ -69,6 +69,10 @@ class JsonPath
     enum_on(obj_or_str).first(*args)
   end
 
+  def exists_in?(obj_or_str)
+    on(obj_or_str).size != 0
+  end
+
   def enum_on(obj_or_str, mode = nil)
     JsonPath::Enumerable.new(self, self.class.process_object(obj_or_str), mode, @opts)
   end

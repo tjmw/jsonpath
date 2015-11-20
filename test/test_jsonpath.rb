@@ -171,7 +171,12 @@ class TestJsonpath < MiniTest::Unit::TestCase
   def test_support_filter_by_childnode_value_over_childnode_and_select_child_key
     assert_equal ["Osennie Vizity"], JsonPath.new("$..book[?(@.written.year == 1996)].title").on(@object)
   end
-  
+
+  def test_path_exists_in_object
+    assert_equal true, JsonPath.new('$.store.bicycle.color').exists_in?(@object)
+    assert_equal false, JsonPath.new('$.store.bicycle.engine').exists_in?(@object)
+  end
+
   def example_object
     { "store"=> {
       "book" => [
